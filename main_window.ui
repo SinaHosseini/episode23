@@ -17,9 +17,9 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>10</y>
-      <width>571</width>
+      <x>9</x>
+      <y>9</y>
+      <width>561</width>
       <height>531</height>
      </rect>
     </property>
@@ -39,8 +39,16 @@
     <property name="title">
      <string>Options</string>
     </property>
+    <widget class="QMenu" name="menuColor_scheme">
+     <property name="title">
+      <string>Color scheme</string>
+     </property>
+     <addaction name="actionDark_mode"/>
+     <addaction name="actionLight_mode"/>
+    </widget>
     <addaction name="menu_new"/>
     <addaction name="menu_open_File"/>
+    <addaction name="menuColor_scheme"/>
    </widget>
    <addaction name="menuNew_Game"/>
   </widget>
@@ -53,6 +61,16 @@
   <action name="menu_open_File">
    <property name="text">
     <string>Open File</string>
+   </property>
+  </action>
+  <action name="actionDark_mode">
+   <property name="text">
+    <string>Dark mode</string>
+   </property>
+  </action>
+  <action name="actionLight_mode">
+   <property name="text">
+    <string>Light mode</string>
    </property>
   </action>
  </widget>
