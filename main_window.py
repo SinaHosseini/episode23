@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-# Form generated from reading UI file 'main_window.ui'
+## Form generated from reading UI file 'main_window.ui'
 ##
-# Created by: Qt User Interface Compiler version 6.5.0
+## Created by: Qt User Interface Compiler version 6.5.0
 ##
-# WARNING! All changes made in this file will be lost when recompiling UI file!
+## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-                            QMetaObject, QObject, QPoint, QRect,
-                            QSize, QTime, QUrl, Qt)
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-                           QCursor, QFont, QFontDatabase, QGradient,
-                           QIcon, QImage, QKeySequence, QLinearGradient,
-                           QPainter, QPalette, QPixmap, QRadialGradient,
-                           QTransform)
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QMenu,
-                               QMenuBar, QSizePolicy, QStatusBar, QWidget)
-
+    QMenuBar, QSizePolicy, QStatusBar, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -58,12 +57,9 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(
-            QCoreApplication.translate("MainWindow", u"SudoKu", None))
-        self.menu_new.setText(QCoreApplication.translate(
-            "MainWindow", u"New ...", None))
-        self.menu_open_File.setText(
-            QCoreApplication.translate("MainWindow", u"Open File", None))
-        self.menuNew_Game.setTitle(
-            QCoreApplication.translate("MainWindow", u"New Game", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"SudoKu", None))
+        self.menu_new.setText(QCoreApplication.translate("MainWindow", u"New ...", None))
+        self.menu_open_File.setText(QCoreApplication.translate("MainWindow", u"Open File", None))
+        self.menuNew_Game.setTitle(QCoreApplication.translate("MainWindow", u"Options", None))
     # retranslateUi
+

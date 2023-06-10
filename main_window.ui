@@ -37,7 +37,7 @@
    </property>
    <widget class="QMenu" name="menuNew_Game">
     <property name="title">
-     <string>New Game</string>
+     <string>Options</string>
     </property>
     <addaction name="menu_new"/>
     <addaction name="menu_open_File"/>
