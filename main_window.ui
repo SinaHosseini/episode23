@@ -26,6 +26,7 @@
     <layout class="QGridLayout" name="grid_layout"/>
    </widget>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -49,10 +50,14 @@
     <addaction name="menu_new"/>
     <addaction name="menu_open_File"/>
     <addaction name="menuColor_scheme"/>
+    <addaction name="actionAbout"/>
+    <addaction name="action_Help"/>
+    <addaction name="actionExit"/>
+    <addaction name="separator"/>
+    <addaction name="actionSolve_game"/>
    </widget>
    <addaction name="menuNew_Game"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="menu_new">
    <property name="text">
     <string>New ...</string>
@@ -71,6 +76,31 @@
   <action name="actionLight_mode">
    <property name="text">
     <string>Light mode</string>
+   </property>
+  </action>
+  <action name="actionSolve_game">
+   <property name="text">
+    <string>Solve game</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="action_Help">
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>
