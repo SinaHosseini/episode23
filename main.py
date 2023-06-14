@@ -1,5 +1,6 @@
 import sys
 import random
+import qdarktheme
 from functools import partial
 from sudoku import Sudoku
 from PySide6.QtWidgets import *
@@ -25,30 +26,24 @@ class MainWindow(QMainWindow):
         self.picking_boxes()
         self.checkable = True
         self.ui.actionDark_mode.triggered.connect(
-            partial(self.dark_mode, i, j, self.line_edits))
+            partial(self.set_color, "black"))
         self.ui.actionLight_mode.triggered.connect(
-            partial(self.light_mode, i, j, self.line_edits))
+            partial(self.set_color, "light", "black"))
 
         self.new_game()
 
     def new_game(self):
         self.checkable = False
         self.editable_cells.clear()
-        puzzle = Sudoku(3, seed=random.randint(0, 1000)).difficulty(0.5)
+        self.puzzle = Sudoku(3, seed=random.randint(0, 1000)).difficulty(0.5)
         for i in range(9):
             for j in range(9):
-                if puzzle.board[i][j] != None:
-                    self.line_edits[i][j].setStyleSheet(
-                        "QLineEdit { border-radius: 0px; border: 1px solid gray; }")
-                    self.line_edits[i][j].setAlignment(
-                        Qt.AlignmentFlag.AlignCenter)
-                    self.line_edits[i][j].setText(str(puzzle.board[i][j]))
+                self.line_edits[i][j].setStyleSheet("color: black;")
+                if self.puzzle.board[i][j] != None:
+                    self.editable_cells.append([i, j])
+                    self.line_edits[i][j].setText(str(self.puzzle.board[i][j]))
                     self.line_edits[i][j].setReadOnly(True)
                 else:
-                    self.line_edits[i][j].setStyleSheet(
-                        "QLineEdit { border-radius: 0px; border: 1px solid gray; }")
-                    self.line_edits[i][j].setAlignment(
-                        Qt.AlignmentFlag.AlignCenter)
                     self.line_edits[i][j].setText("")
         self.checkable = True
 
@@ -73,8 +68,11 @@ class MainWindow(QMainWindow):
                         self.editable_cells.append([i, j])
                         self.line_edits[i][j].setText(str(puzzle_board[i][j]))
                         self.line_edits[i][j].setReadOnly(True)
+                        self.puzzle.board[i][j] = puzzle_board[i][j]
                     else:
-                        self.line_edits[i][j].setText("")
+                        self.line_edits[i][j].setText('')
+                        self.line_edits[i][j].setReadOnly(False)
+                        self.puzzle.board[i][j] = None
             self.checkable = True
         except:
             msg_box = QMessageBox()
@@ -83,9 +81,9 @@ class MainWindow(QMainWindow):
 
     def false_cells(self, row, col):
         if [row, col] in self.editable_cells:
-            self.line_edits[row][col].setStyleSheet("background-color: pink")
+            self.line_edits[row][col].setStyleSheet("background-color: pink;")
         else:
-            self.line_edits[row][col].setStyleSheet("background-color: red")
+            self.line_edits[row][col].setStyleSheet("background-color: red;")
 
     def check(self, i=-1, j=-1):
         output = True
@@ -101,7 +99,7 @@ class MainWindow(QMainWindow):
                     output = False
                 elif [row, col] not in self.editable_cells:
                     self.line_edits[row][col].setStyleSheet(
-                        "color: rgb(255, 85, 255);")
+                        "color: yellow;")
                 for row9 in range(row+1, 9):
                     number2 = self.line_edits[row9][col].text()
                     if number1 == number2 and number2 != "":
@@ -152,7 +150,7 @@ class MainWindow(QMainWindow):
                     QSizePolicy.Expanding, QSizePolicy.Expanding)
                 new_cell.setMinimumWidth(30)
                 new_cell.setFont(QFont("Center", pointSize=15))
-                new_cell.setStyleSheet("color: black")
+                new_cell.setStyleSheet("color: black;")
                 self.ui.grid_layout.addWidget(new_cell, i, j)
                 new_cell.textChanged.connect(partial(self.validation, i, j))
                 self.line_edits[i][j] = new_cell
@@ -164,7 +162,7 @@ class MainWindow(QMainWindow):
                 if self.puzzle.board[i][j] is None:
                     self.line_edits[i][j].setText(
                         str(self.puzzle.solve().board[i][j]))
-                    self.line_edits[i][j].setStyleSheet('color: green')
+                    self.line_edits[i][j].setStyleSheet("color: green;")
 
         self.checkable = True
 
@@ -178,25 +176,13 @@ class MainWindow(QMainWindow):
         msg_box.setText("The rules for sudoku are simple. A 9*9 square must be filled in with numbers from 1-9 with no repeated numbers in each line, horizontally or vertically. To challenge you more, there are 3*3 squares marked out in the grid, and each of these squares can't have any repeat numbers either.")
         msg_box.exec()
 
-    def dark_mode(self, i, j, cell):
-        if self.ui.actionDark_mode.triggered:
-            self.ui.centralwidget.setStyleSheet(
-                "background-color: rgb(30, 30, 30);")
-            for i in range(9):
-                for j in range(9):
-                    cell[i][j].setStyleSheet(
-                        "background-color: rgb(70, 70, 70); \
-                        color: rgb(255, 255, 255);")
+    def set_color(self, color, textColor='black'):
+        if color == "black":
+            qdarktheme.setup_theme("dark")
+        else:
+            qdarktheme.setup_theme("light")
 
-    def light_mode(self, i, j, cell):
-        if self.ui.actionLight_mode.triggered:
-            self.ui.centralwidget.setStyleSheet(
-                "background-color: rgb(240, 240, 240);")
-            for i in range(9):
-                for j in range(9):
-                    cell[i][j].setStyleSheet(
-                        "background-color: rgb(255, 255, 255); \
-                        color: rgb(0, 0, 0);")
+        self.check()
 
     def exit(self):
         exit(0)
